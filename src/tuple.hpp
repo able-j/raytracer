@@ -1,5 +1,5 @@
-#ifndef TUPLE_H_
-#define TUPLE_H_
+#ifndef TUPLE_HPP_
+#define TUPLE_HPP_
 
 
 class Tuple
@@ -24,25 +24,35 @@ private:
 class Vector : public Tuple
 {
 public:
+    Vector() {};
     Vector(const float x, const float y, const float z) : Tuple(x, y, z, 0.0f) {};
     Vector(const Tuple& t) : Tuple(t) {};
+    ~Vector() = default;
 
     float magnitude() const;
-    Vector normalize() const;
+    void  normalize();
+    float dot(const Vector& v) const;
+
+    static Vector normalize(const Vector& v);
+    static float  dot(const Vector& a, const Vector& b);
+    static Vector cross(const Vector& a, const Vector& b);
 };
 
 class Point : public Tuple
 {
 public:
+    Point() {};
     Point(const float x, const float y, const float z) : Tuple(x, y, z, 1.0f) {};
+    Point(const Tuple& t) : Tuple(t) {};
+    ~Point() = default;
 };
 
-bool operator==(const Tuple l, const Tuple r);
-Tuple operator+(const Tuple l, const Tuple r);
-Tuple operator-(const Tuple l, const Tuple r);
-Tuple operator-(const Tuple a);
-Tuple operator*(const Tuple l, const float s);
-Tuple operator/(const Tuple l, const float s);
+bool operator==(const Tuple& l, const Tuple& r);
+Tuple operator+(const Tuple& l, const Tuple& r);
+Tuple operator-(const Tuple& l, const Tuple& r);
+Tuple operator-(const Tuple& a);
+Tuple operator*(const Tuple& l, const float& s);
+Tuple operator/(const Tuple& l, const float& s);
 
 
-#endif // TUPLE_H_
+#endif
